@@ -1,0 +1,69 @@
+/* div.css-1n76uvr.e1f1d6gn0 > div.element-container > div.stButton > button {
+    background-color: beige;
+} */
+
+.css-1n76uvr {
+    gap: 0.5rem;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput){
+    /* background-color: rgb(229, 157, 80); */
+    position: fixed;
+    bottom: 16px;
+    display: flex;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .element-container {
+    display: flex;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .stButton {
+    display: flex;
+    justify-content: flex-end;
+}
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .stTextInput label.css-1qg05tj.e1y5xkzn3 {
+    display: none;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .stButton .css-1yh7rcq {
+    border-radius: 0.3rem;
+    background-color: rgba(48, 48, 48, 0.375);
+}
+
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea){
+    /* background-color: rgb(229, 157, 80); */
+    position: fixed;
+    bottom: 16px;
+    display: flex;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .element-container {
+    display: flex;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .stButton {
+    display: flex;
+    justify-content: flex-end;
+}
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .stTextArea label.css-1qg05tj.e1y5xkzn3 {
+    display: none;
+}
+
+.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .stButton .css-1yh7rcq {
+    border-radius: 0.3rem;
+    background-color: rgba(48, 48, 48, 0.375);
+}
+
+/* .css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) textarea {
+    height: auto;
+} */
+
+.st-be:focus {
+    /* max-height: 500px; */
+    /* height:max-content; */
+
+    /* height: 450px; */
+}
+
+/* css-1n76uvr e1f1d6gn0 */

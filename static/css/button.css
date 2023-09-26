@@ -1,0 +1,60 @@
+/* containers sidebar */
+/* .css-1balh2r.e1f1d6gn0 {
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+}
+
+.css-1balh2r:first-child {
+  background-color: purple;
+}
+.css-ocqkz7.e1f1d6gn3:active {
+  color: yellowgreen;
+}
+
+.css-158ayb7:focus:not(:active) {
+  color: red;
+} */
+
+/* button {
+  width: 100px;
+} */
+
+
+.css-17fow7x.e1f1d6gn0:has(.css-q177l) .css-158ayb7 {
+  display: none;
+}
+
+
+.css-17fow7x.e1f1d6gn0 .css-17fow7x.e1f1d6gn0:has(.css-r5rgcs) {
+  display: flex;
+  flex-direction: row;
+}
+/* .css-1balh2r.e1f1d6gn0 .css-1balh2r.e1f1d6gn0:has(.css-1qmq70f) .css-158ayb7 {
+  display: block;
+  width: 20%;
+} */
+.css-17fow7x.e1f1d6gn0 .css-17fow7x.e1f1d6gn0:has(.css-r5rgcs) .stButton:has(.css-158ayb7 ) {
+  /* background-color: orange; */
+  /* display: inline; */
+  width: 20%;
+}
+
+.css-17fow7x.e1f1d6gn0 .css-17fow7x.e1f1d6gn0:has(.css-r5rgcs) .css-158ayb7 {
+  /* background-color: orange; */
+  display: inline;
+  /* width: 20%; */
+}
+
+/* .css-1balh2r.e1f1d6gn0 .css-1balh2r.e1f1d6gn0:has(.css-1qmq70f) .css-1qmq70f {
+  width: 80%;
+} */
+.css-17fow7x.e1f1d6gn0 .css-17fow7x.e1f1d6gn0:has(.css-r5rgcs) .stButton:has(.css-r5rgcs) {
+  width: 50%;
+}
+/* .css-r5rgcs primary not full width 
+   .css-1qmq70f primary full with
+
+   .css-17fow7x.e1f1d6gn0
+   .css-1balh2r.e1f1d6gn0
+*/
