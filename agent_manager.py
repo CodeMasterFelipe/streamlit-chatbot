@@ -9,14 +9,9 @@ from agents.absolute_agent.base import AbsoluteAgent
 from config import LLM_MODELS
 
 
-def initialize_agent_executor(model_name, tools, memory, agent_kwargs=None):
+def initialize_agent_executor(model_name, tools, memory, llm_kwargs={}):
     model_info = LLM_MODELS[model_name]
-
-    if agent_kwargs is None:
-        agent_kwargs = {
-            "extra_prompt_messages": [MessagesPlaceholder(variable_name="memory")],
-            "system_message": SystemMessage(content="Your Name is Nova, and you are a very helpful AI assistant that has tools at her disposal."),
-        }
+    default_system_prompt = "Your Name is Nova, and you are a very helpful AI assistant that has tools at her disposal."
 
     if model_info.source == "replicate":
         # Your existing code to initialize agent_executor for replicate source
@@ -28,19 +23,23 @@ def initialize_agent_executor(model_name, tools, memory, agent_kwargs=None):
                 # max_length=2000,
                 max_new_tokens=2000,
                 top_p=0.95,
-                # system_prompt=system_prompt.format(
-                #     tools_formatted=format_tools_prompt(tools)),
-                # system_prompt=system_prompt.format(
-                #     ai_name=AI_NAME, toolset=toolset_string(tools), tool_names=tool_names(tools)),
             ),
         )
         agent_executor = AbsoluteAgent(llm, tools)
     elif model_info.source == "openai":
         # Your existing code to initialize agent_executor for openai source
+        agent_kwargs = {
+            "extra_prompt_messages": [
+                MessagesPlaceholder(variable_name="memory")],
+            "system_message": SystemMessage(
+                content=llm_kwargs.get("system_prompt", default_system_prompt)),
+        }
+
         llm = ChatOpenAI(
             model_name=model_info.model,
             openai_api_key=os.environ["OPENAI_API_KEY"],
             streaming=True,
+            temperature=llm_kwargs.get("temperature", 0.7)
         )
         agent_executor = initialize_agent(
             tools,
