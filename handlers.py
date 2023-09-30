@@ -12,15 +12,6 @@ MEMORY_MAP = {
 
 
 def handle_llm_change():
-    print("change memory")
-    print("change memory")
-    print("change memory")
-    print("change memory")
-    print("change memory")
-    print("change memory")
-    print("change memory")
-    print("change memory")
-    print("change memory")
     model_info = LLM_MODELS[st.session_state.llm_selected]
     if LLM_MODELS[st.session_state.llm_selected].source == "openai":
         st.session_state.memory = ConversationBufferMemory(
