@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_chat import message
 
 from langchain.prompts.chat import SystemMessage, HumanMessagePromptTemplate, AIMessage, HumanMessage
 from langchain.callbacks import StreamlitCallbackHandler
@@ -61,10 +62,7 @@ class ChatbotApp:
             st.session_state["memory"] = None
             handle_llm_change()
         if "messages" not in st.session_state:
-            st.session_state["messages"] = [
-                {"role": "assistant",
-                 "content": "Hi, I'm a chatbot who can search the web. How can I help you?"}
-            ]
+            st.session_state["messages"] = []
         if "current_session" not in st.session_state:
             st.session_state["current_session"] = None
         if "db" not in st.session_state:
@@ -77,41 +75,50 @@ class ChatbotApp:
             self.model_info = LLM_MODELS[self.model_name]
 
             # Display buttons for each session
-            st.subheader("Select a Chat Session")
-            st.button("\u002B New Chat", use_container_width=True,
-                      on_click=handle_new_chat_session, type="secondary")
 
-            for session in st.session_state.db.get_all_sessions():
+            with st.container():
+                st.subheader("Select a Chat Session")
+                st.button("\u002B New Chat", use_container_width=True,
+                          on_click=handle_new_chat_session, type="secondary")
+                for session in st.session_state.db.get_all_sessions():
 
-                with st.container():
-                    selected = st.session_state.current_session == session
+                    with st.container():
+                        selected = st.session_state.current_session == session
 
-                    if selected:
-                        col1, col2, col3 = st.columns(
-                            [.8, .1, .1], gap="small")
-                        col1.button(
-                            session, key=f"button_{session}", use_container_width=True, type="primary")
-                        with col2:
+                        if selected:
+                            # col1, col2, col3 = st.columns(
+                            #     [.8, .1, .1], gap="small")
                             st.button(
-                                "X", key=f"delete_{session}", on_click=lambda session_id=session: handle_session_deletion(session_id), use_container_width=True)
-                        with col3:
-                            st.button(
-                                "✎", key=f"edit_{session}", use_container_width=True)
+                                session, key=f"button_{session}", use_container_width=True, type="primary")
+                            with st.container():
+                                st.button(
+                                    "X", key=f"delete_{session}", on_click=lambda session_id=session: handle_session_deletion(session_id), use_container_width=True)
+                                st.button(
+                                    "✎", key=f"edit_{session}", use_container_width=True)
 
-                    else:
-                        st.button(session, key=f"button_{session}", on_click=lambda session_id=session: handle_chat_session_change(
-                            session_id), use_container_width=True, type="secondary")
-                    # col1, col2 = st.columns([6, 2])
-                    # with col1:
-                    # button = bt_container.button(
-                    #     session, key=f"button_{session}", on_click=lambda session_id=session: handle_chat_session_change(session_id), use_container_width=not st.session_state.current_session == session, type=type)
-                    # with col2:
-                    # delete_button = bt_container.button(
-                    #     "delete", key=f"delete_{session}")
-                # if st.button(session):
-                #     self.current_session = session
-                #     st.session_state["messages"] = self.db.get_all_chats(
-                #         self.current_session)
+                        else:
+                            st.button(session, key=f"button_{session}", on_click=lambda session_id=session: handle_chat_session_change(
+                                session_id), use_container_width=True, type="secondary")
+            # for session in st.session_state.db.get_all_sessions():
+
+            #     with st.container():
+            #         selected = st.session_state.current_session == session
+
+            #         if selected:
+            #             col1, col2, col3 = st.columns(
+            #                 [.8, .1, .1], gap="small")
+            #             col1.button(
+            #                 session, key=f"button_{session}", use_container_width=True, type="primary")
+            #             with col2:
+            #                 st.button(
+            #                     "X", key=f"delete_{session}", on_click=lambda session_id=session: handle_session_deletion(session_id), use_container_width=True)
+            #             with col3:
+            #                 st.button(
+            #                     "✎", key=f"edit_{session}", use_container_width=True)
+
+            #         else:
+            #             st.button(session, key=f"button_{session}", on_click=lambda session_id=session: handle_chat_session_change(
+            #                 session_id), use_container_width=True, type="secondary")
 
     def check_if_new_session(self):
         if "user" not in [m["role"] for m in st.session_state.messages]:
@@ -163,24 +170,32 @@ class ChatbotApp:
                 on_change=lambda: print(
                     f"===> chat with {st.session_state.character}")
             )
-            for msg in st.session_state.messages:
-                print(st.session_state.messages)
-                st.chat_message(msg["role"]).write(msg["content"])
+        for msg in st.session_state.messages:
+            print(st.session_state.messages)
+            st.chat_message(msg["role"], avatar="./db/images/Assistant.png" if msg["role"]
+                            == "assistant" else None).write(msg["content"])
+            # message(msg["content"], is_user=msg["role"] ==
+            #         "user", logo="https://gravatar.com/avatar/1f82b0492a0a938288c2d5b70534a1fb?s=400&d=robohash&r=x")
 
         chat_input_container = st.container()
 
-        st.write(st.session_state.character)
+        # message("A message")
+        # message("Another message", is_user=True)
 
         # with st.container():
-        # prompt = st.chat_input(placeholder="Type your message here...")
         chat_input_container.button("Regenerate")
+        prompt = chat_input_container.chat_input(
+            placeholder="Type your message here...")
         # prompt = chat_input_container.text_input(
         #     "", placeholder="Type your message here...")
-        prompt = chat_input_container.text_area(
-            "", placeholder="Type your message here...", key="prompt")
+        # prompt = chat_input_container.text_area(
+        #     "", placeholder="Type your message here...", key="prompt")
 
-        if chat_input_container.button("send"):
+        if prompt:
             self.handle_chat(prompt)
+
+        # if chat_input_container.button("send"):
+        #     self.handle_chat(prompt)
 
 
 if __name__ == "__main__":

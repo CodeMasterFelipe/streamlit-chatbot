@@ -1,69 +1,197 @@
-/* div.css-1n76uvr.e1f1d6gn0 > div.element-container > div.stButton > button {
-    background-color: beige;
+/* Existing CSS stays intact */
+/* 
+.row-widget.stButton {
+  margin-bottom: 10px;
+}
+
+.stChatFloatingInputContainer {
+  margin-top: 10px;
+}
+
+.element-container.css-1hynsf2.e1f1d6gn2 {
+  padding-bottom: 0 !important;
+}
+
+.stChatFloatingInputContainer.css-90vs21.e1d2x3se2 {
+  padding-top: 0 !important;
+  position: relative;
+  top: -20px;
 } */
 
-.css-1n76uvr {
-    gap: 0.5rem;
+/* stVerticalBlock */
+/* .css-1n76uvr.e1f1d6gn0 */
+/* div.css-1n76uvr.e1f1d6gn0:has(
+    > div.element-container.css-1etyx85.e1f1d6gn2
+      > div.stChatFloatingInputContainer.css-90vs21.e1d2x3se2
+  ) { */
+
+/* --base
+--primary-color
+--background-color
+--secondary-background-color
+--text-color
+--font */
+:root {
+  --primary-color: #00B4D8;
+  --primary-color-rgb: 0, 180, 216;
+  --primary-color-dark: #0086A8;
+  --background-color: #0E1117;
+  --secondary-background-color: #262730;
+  --secondary-background-color-rgb: 38, 39, 48;
+  --text-color: #FAFAFA;
+  --font: sans-serif;
 }
 
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput){
-    /* background-color: rgb(229, 157, 80); */
-    position: fixed;
-    bottom: 16px;
-    display: flex;
-}
+/* Chat input container */
+div.css-1n76uvr.e1f1d6gn0:has(
+    > div.element-container
+      > div.stChatFloatingInputContainer
+  ) {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .element-container {
-    display: flex;
-}
-
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .stButton {
-    display: flex;
-    justify-content: flex-end;
-}
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .stTextInput label.css-1qg05tj.e1y5xkzn3 {
-    display: none;
-}
-
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextInput) .stButton .css-1yh7rcq {
-    border-radius: 0.3rem;
-    background-color: rgba(48, 48, 48, 0.375);
-}
-
-
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea){
-    /* background-color: rgb(229, 157, 80); */
-    position: fixed;
-    bottom: 16px;
-    display: flex;
-}
-
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .element-container {
-    display: flex;
-}
-
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .stButton {
+  [data-testid="stButton"] {
+    position: relative;
     display: flex;
     justify-content: flex-end;
+  }
+
+  .stButton button {
+    background-color: rgba(var(--secondary-background-color-rgb),0.75);
+    border: 1px solid rgba(var(--secondary-background-color-rgb),0.75);
+  }
+  .stButton button:hover {
+    border: 1px solid var(--primary-color);
+  }
+  .stButton button:active {
+    /* background-color: rgba(var(--secondary-background-color-rgb),1); */
+    background-color: var(--primary-color);
+    color: var(--text-color);
+  }
+  
+
+  .stChatFloatingInputContainer {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-top: 0;
+  }
 }
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .stTextArea label.css-1qg05tj.e1y5xkzn3 {
-    display: none;
+
+/* Messages Session Buttons */
+.e1f1d6gn0:has( 
+  > div.element-container 
+  > div.stHeadingContainer
+) {
+  /* background-color: yellowgreen !important; */
+  [data-testid="stVerticalBlock"] {
+    display:inline;
+    flex-direction: row;
+    gap: 0;
+    max-height: 40px;
+    overflow: hidden;
+    /* text-overflow: clip; */
+    /* white-space: nowrap; */
+    text-justify: start;
+    align-items: start;
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) {
+    /* border: 1px solid var(--primary-color); */
+    /* background-color: var(--primary-color); */
+    /* background-color: var(--primary-color-dark); */
+    background: #262730;
+    box-shadow: inset 5px 5px 8px #18191f,
+            inset -5px -5px 8px #343541;
+    border-radius: 0.5rem;
+    /* box-shadow: inset 20px 0px 20px -2px #262730; */
+    /* box-shadow: inset -10px 0px 20px -2px #262730; */
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container:has(button[kind="primary"]) {
+    width: 100% !important;
+    /* background-color: var(--primary-color-dark); */
+    padding: 0;
+    margin: 0;
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container {
+    width: 15% !important;
+    border: none;
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) [data-testid="stVerticalBlock"] {
+    width: 50% !important;
+    border: none;
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container:has([kind="primary"]) .stButton button {
+    /* box-shadow: -7px 0px 10px 1px var(--primary-color); */
+    /* margin-left: 0.5rem; */
+    /* margin-right: 0.2rem; */
+    /* background-color: orange !important; */
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) [data-testid="stVerticalBlock"] {
+    box-shadow: -7px 0px 10px 1px #262730a4;
+    border-radius: 0.5rem;
+    /* background-color: var(--primary-color); */
+    background-color: rgba(var(--primary-color-rgb), 0.2);
+    backdrop-filter: blur(10px);
+    position: relative;
+    right: 400px;
+    /* animation: 3s linear 1s infinite alternate slidein; */
+    /* margin-left: 0.5rem; */
+    /* margin-right: 0.2rem; */
+    /* background-color: orange !important; */
+  }
+
+  [data-testid="stVerticalBlock"]:has([kind="primary"])  .element-container .stButton button[kind="secondary"]:hover {
+    /* background-color: #0E1117; */
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container:last-child {
+    margin-right: 0.25rem;
+    padding: 0 0;
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"])  .element-container .stButton button {
+    /* background-color: var(--primary-color); */
+    background-color: transparent;
+    border: none;
+  }
+
+
+  [data-testid="stVerticalBlock"] .element-container .stButton {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  [data-testid="stVerticalBlock"] .element-container .stButton button {
+    height: 100% !important;
+    width: 100% !important;
+    text-overflow: clip;
+    max-height: 100% !important;
+    padding: 0;
+  }
+  [data-testid="stVerticalBlock"] .element-container .stButton button > div {
+    height: 100% !important;
+    width: 100% !important;
+    /* margin-left: 0.5rem; */
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+    text-align: center;
+    text-shadow: 0px 0px 4px #0E1117;
+    /* padding-left: 0 0.5rem; */
+    padding-left: 1rem;
+  }
+  [data-testid="stVerticalBlock"] [data-testid="stVerticalBlock"] .stButton button div {
+    padding: 0;
+  }
+  /* [data-testid="stVerticalBlock"] .element-container .stButton button[kind="primary"] > div {
+    padding-left: 1rem;
+  } */
+  [data-testid="stVerticalBlock"] .element-container .stButton button > div p {
+    margin-block-end: 0;
+    /* padding-left: 0 0.5rem; */
+  }
+  /* [data-testid="stVerticalBlock"] .element-container .stButton button[kind="primary"] {
+    box-shadow: inset -20px 0px 20px -20px #0E1117;
+  } */
 }
 
-.css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) .stButton .css-1yh7rcq {
-    border-radius: 0.3rem;
-    background-color: rgba(48, 48, 48, 0.375);
-}
-
-/* .css-1n76uvr.e1f1d6gn0 .css-1n76uvr.e1f1d6gn0:has(.stTextArea) textarea {
-    height: auto;
-} */
-
-.st-be:focus {
-    /* max-height: 500px; */
-    /* height:max-content; */
-
-    /* height: 450px; */
-}
-
-/* css-1n76uvr e1f1d6gn0 */
