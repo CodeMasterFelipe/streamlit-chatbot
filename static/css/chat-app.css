@@ -1,51 +1,19 @@
 /* Existing CSS stays intact */
-/* 
-.row-widget.stButton {
-  margin-bottom: 10px;
-}
 
-.stChatFloatingInputContainer {
-  margin-top: 10px;
-}
-
-.element-container.css-1hynsf2.e1f1d6gn2 {
-  padding-bottom: 0 !important;
-}
-
-.stChatFloatingInputContainer.css-90vs21.e1d2x3se2 {
-  padding-top: 0 !important;
-  position: relative;
-  top: -20px;
-} */
-
-/* stVerticalBlock */
-/* .css-1n76uvr.e1f1d6gn0 */
-/* div.css-1n76uvr.e1f1d6gn0:has(
-    > div.element-container.css-1etyx85.e1f1d6gn2
-      > div.stChatFloatingInputContainer.css-90vs21.e1d2x3se2
-  ) { */
-
-/* --base
---primary-color
---background-color
---secondary-background-color
---text-color
---font */
 :root {
-  --primary-color: #00B4D8;
+  --primary-color: #00b4d8;
   --primary-color-rgb: 0, 180, 216;
-  --primary-color-dark: #0086A8;
-  --background-color: #0E1117;
+  --primary-color-dark: #0086a8;
+  --background-color: #0e1117;
   --secondary-background-color: #262730;
   --secondary-background-color-rgb: 38, 39, 48;
-  --text-color: #FAFAFA;
+  --text-color: #fafafa;
   --font: sans-serif;
 }
 
 /* Chat input container */
 div.css-1n76uvr.e1f1d6gn0:has(
-    > div.element-container
-      > div.stChatFloatingInputContainer
+    > div.element-container > div.stChatFloatingInputContainer
   ) {
   position: fixed;
   bottom: 0;
@@ -60,8 +28,8 @@ div.css-1n76uvr.e1f1d6gn0:has(
   }
 
   .stButton button {
-    background-color: rgba(var(--secondary-background-color-rgb),0.75);
-    border: 1px solid rgba(var(--secondary-background-color-rgb),0.75);
+    background-color: rgba(var(--secondary-background-color-rgb), 0.75);
+    border: 1px solid rgba(var(--secondary-background-color-rgb), 0.75);
   }
   .stButton button:hover {
     border: 1px solid var(--primary-color);
@@ -71,7 +39,6 @@ div.css-1n76uvr.e1f1d6gn0:has(
     background-color: var(--primary-color);
     color: var(--text-color);
   }
-  
 
   .stChatFloatingInputContainer {
     position: relative;
@@ -81,13 +48,10 @@ div.css-1n76uvr.e1f1d6gn0:has(
 }
 
 /* Messages Session Buttons */
-.e1f1d6gn0:has( 
-  > div.element-container 
-  > div.stHeadingContainer
-) {
+.e1f1d6gn0:has(> div.element-container > div.stHeadingContainer) {
   /* background-color: yellowgreen !important; */
   [data-testid="stVerticalBlock"] {
-    display:inline;
+    display: flex;
     flex-direction: row;
     gap: 0;
     max-height: 40px;
@@ -98,63 +62,52 @@ div.css-1n76uvr.e1f1d6gn0:has(
     align-items: start;
   }
   [data-testid="stVerticalBlock"]:has([kind="primary"]) {
-    /* border: 1px solid var(--primary-color); */
-    /* background-color: var(--primary-color); */
-    /* background-color: var(--primary-color-dark); */
     background: #262730;
-    box-shadow: inset 5px 5px 8px #18191f,
-            inset -5px -5px 8px #343541;
+    box-shadow: inset 5px 5px 8px #18191f, inset -5px -5px 8px #343541;
     border-radius: 0.5rem;
-    /* box-shadow: inset 20px 0px 20px -2px #262730; */
-    /* box-shadow: inset -10px 0px 20px -2px #262730; */
   }
-  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container:has(button[kind="primary"]) {
-    width: 100% !important;
+  [data-testid="stVerticalBlock"] {
+    background: linear-gradient(145deg, #292a33, #22232b);
+    box-shadow: 8px 8px 17px #1e1e25, -8px -8px 17px #2e303b;
+    border-radius: 0.5rem;
+    /* border: none; */
+  }
+  [data-testid="stVerticalBlock"]:has([kind="primary"])
+    .element-container:has(button[kind="primary"]) {
+    width: 70% !important;
     /* background-color: var(--primary-color-dark); */
     padding: 0;
     margin: 0;
   }
   [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container {
     width: 15% !important;
+    max-height: 34px;
     border: none;
   }
-  [data-testid="stVerticalBlock"]:has([kind="primary"]) [data-testid="stVerticalBlock"] {
-    width: 50% !important;
-    border: none;
+  [data-testid="stVerticalBlock"]:has([kind="primary"])
+    div:has([data-testid="stVerticalBlock"]) {
+    margin: 3px;
   }
-  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container:has([kind="primary"]) .stButton button {
-    /* box-shadow: -7px 0px 10px 1px var(--primary-color); */
-    /* margin-left: 0.5rem; */
-    /* margin-right: 0.2rem; */
-    /* background-color: orange !important; */
-  }
-  [data-testid="stVerticalBlock"]:has([kind="primary"]) [data-testid="stVerticalBlock"] {
+  [data-testid="stVerticalBlock"]:has([kind="primary"])
+    [data-testid="stVerticalBlock"] {
     box-shadow: -7px 0px 10px 1px #262730a4;
     border-radius: 0.5rem;
-    /* background-color: var(--primary-color); */
-    background-color: rgba(var(--primary-color-rgb), 0.2);
-    backdrop-filter: blur(10px);
-    position: relative;
-    right: 400px;
-    /* animation: 3s linear 1s infinite alternate slidein; */
-    /* margin-left: 0.5rem; */
-    /* margin-right: 0.2rem; */
-    /* background-color: orange !important; */
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
   }
-
-  [data-testid="stVerticalBlock"]:has([kind="primary"])  .element-container .stButton button[kind="secondary"]:hover {
-    /* background-color: #0E1117; */
-  }
-  [data-testid="stVerticalBlock"]:has([kind="primary"]) .element-container:last-child {
+  [data-testid="stVerticalBlock"]:has([kind="primary"])
+    .element-container:last-child {
     margin-right: 0.25rem;
     padding: 0 0;
   }
-  [data-testid="stVerticalBlock"]:has([kind="primary"])  .element-container .stButton button {
+  [data-testid="stVerticalBlock"]:has([kind="primary"])
+    .element-container
+    .stButton
+    button {
     /* background-color: var(--primary-color); */
     background-color: transparent;
     border: none;
   }
-
 
   [data-testid="stVerticalBlock"] .element-container .stButton {
     height: 100% !important;
@@ -162,6 +115,7 @@ div.css-1n76uvr.e1f1d6gn0:has(
   }
 
   [data-testid="stVerticalBlock"] .element-container .stButton button {
+    border: none;
     height: 100% !important;
     width: 100% !important;
     text-overflow: clip;
@@ -176,22 +130,15 @@ div.css-1n76uvr.e1f1d6gn0:has(
     text-overflow: clip;
     white-space: nowrap;
     text-align: center;
-    text-shadow: 0px 0px 4px #0E1117;
+    text-shadow: 0px 0px 4px #0e1117;
     /* padding-left: 0 0.5rem; */
     padding-left: 1rem;
   }
-  [data-testid="stVerticalBlock"] [data-testid="stVerticalBlock"] .stButton button div {
+  [data-testid="stVerticalBlock"]
+    [data-testid="stVerticalBlock"]
+    .stButton
+    button
+    div {
     padding: 0;
   }
-  /* [data-testid="stVerticalBlock"] .element-container .stButton button[kind="primary"] > div {
-    padding-left: 1rem;
-  } */
-  [data-testid="stVerticalBlock"] .element-container .stButton button > div p {
-    margin-block-end: 0;
-    /* padding-left: 0 0.5rem; */
-  }
-  /* [data-testid="stVerticalBlock"] .element-container .stButton button[kind="primary"] {
-    box-shadow: inset -20px 0px 20px -20px #0E1117;
-  } */
 }
-
