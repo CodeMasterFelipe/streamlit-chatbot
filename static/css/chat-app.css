@@ -12,9 +12,7 @@
 }
 
 /* Chat input container */
-div.css-1n76uvr.e1f1d6gn0:has(
-    > div.element-container > div.stChatFloatingInputContainer
-  ) {
+div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
   position: fixed;
   bottom: 0;
   display: flex;
