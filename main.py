@@ -133,7 +133,8 @@ class ChatbotApp:
         st.session_state.db.insert_chat(
             st.session_state.current_session, {"role": "user", "content": prompt})
         # st.session_state.openai_messages.append(HumanMessage(content=prompt))
-        st.chat_message("user").write(prompt)
+        st.chat_message(
+            "user", avatar="./static/assets/user-avatar.png").write(prompt)
 
         character_info = st.session_state.db.get_character(
             st.session_state.character)
@@ -173,7 +174,7 @@ class ChatbotApp:
         for msg in st.session_state.messages:
             print(st.session_state.messages)
             st.chat_message(msg["role"], avatar="./db/images/Assistant.png" if msg["role"]
-                            == "assistant" else None).write(msg["content"])
+                            == "assistant" else "./static/assets/user-avatar.png").write(msg["content"])
             # message(msg["content"], is_user=msg["role"] ==
             #         "user", logo="https://gravatar.com/avatar/1f82b0492a0a938288c2d5b70534a1fb?s=400&d=robohash&r=x")
 
