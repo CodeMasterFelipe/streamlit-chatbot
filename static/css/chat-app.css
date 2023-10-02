@@ -18,6 +18,7 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  z-index: 100;
 
   [data-testid="stButton"] {
     position: relative;
@@ -42,6 +43,7 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
     position: relative;
     padding-bottom: 3rem;
     padding-top: 0;
+    width: unset !important;
   }
 }
 
@@ -146,7 +148,7 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
 .stChatMessage.css-janbn0 {
   display: flex;
   flex-direction: row-reverse;
-  max-width: 78.8%;
+  max-width: 78.6%;
   width: fit-content;
   margin-left: auto;
   align-items: end;
@@ -215,6 +217,7 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
 
 @media only screen and (max-width: 600px) {
   .main .block-container {
+    width: 100%;
     max-width: 100%;
   }
   .stChatMessage.css-4oy321 {
@@ -222,5 +225,10 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
   }
   .stChatMessage.css-janbn0 {
     max-width: 85%;
+  }
+  .stChatMessage img {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
   }
 }
