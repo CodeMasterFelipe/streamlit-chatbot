@@ -1,6 +1,7 @@
 import streamlit as st
 
 from langchain.memory import ConversationBufferMemory
+from langchain.prompts.chat import AIMessage, HumanMessage
 from llama_customs import LlamaConversationBufferMemory
 
 from config import LLM_MODELS
@@ -8,6 +9,11 @@ from config import LLM_MODELS
 MEMORY_MAP = {
     "openai": ConversationBufferMemory,
     "replicate": LlamaConversationBufferMemory
+}
+
+MESSAGE_MAP = {
+    "user": HumanMessage,
+    "assistant": AIMessage,
 }
 
 
@@ -28,6 +34,15 @@ def handle_chat_session_change(session_id):
     all_chats = st.session_state.db.get_all_chats(session_id)
     print("Loaded Session Chats =>", all_chats)
     st.session_state.messages = all_chats
+    _load_memory(all_chats)
+
+
+def _load_memory(chats: list):
+    st.session_state.memory.chat_memory.messages = process_chat(chats)
+
+
+def process_chat(chats: list):
+    return [MESSAGE_MAP[msg["role"]](content=msg["content"]) for msg in chats]
 
 
 def handle_new_chat_session():
