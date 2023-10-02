@@ -142,3 +142,87 @@ div.css-1n76uvr.e1f1d6gn0:has(
     padding: 0;
   }
 }
+
+/* Chat Messages */
+/* User */
+.stChatMessage.css-janbn0 {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 78.8%;
+  width: fit-content;
+  margin-left: auto;
+  align-items: end;
+  /* background-color: var(--primary-color-dark); */
+  background-color: transparent;
+  /* text-align: right; */
+  [data-testid="stChatMessageContent"] > div {
+    align-items: end;
+    width: unset !important;
+    max-width: 100% !important;
+  }
+  [data-testid="stChatMessageContent"] {
+    background-color: var(--primary-color-dark);
+    max-width: 100%;
+  }
+  [data-testid="stChatMessageContent"] > div [data-testid="stVerticalBlock"] {
+    width: unset !important;
+    max-width: 100% !important;
+  }
+  [data-testid="stChatMessageContent"] > div .stMarkdown {
+    width: unset !important;
+    max-width: 100% !important;
+  }
+
+  [data-testid="stChatMessageContent"] > div .element-container {
+    width: unset !important;
+    /* max-width: 400px; */
+    /* max-width: 100% !important; */
+  }
+}
+
+.stChatMessage.css-4oy321 {
+  display: flex;
+  flex-direction: row;
+  width: 78.6%;
+  margin-right: auto;
+  /* background-color: var(--secondary-background-color); */
+  background-color: transparent;
+  align-items: end;
+  /* padding: 1rem; */
+  /* img {
+    border-radius: 50%;
+  } */
+}
+
+[data-testid="stChatMessageContent"] {
+  background-color: var(--secondary-background-color);
+  border-radius: 1rem;
+  padding: 0.31rem 0.88rem;
+}
+
+.stChatMessage {
+  padding: 0;
+}
+.stChatMessage img {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+.main .block-container {
+  /* max-width: 78.6%; */
+  width: 61.8%;
+  max-width: 1200px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main .block-container {
+    max-width: 100%;
+  }
+  .stChatMessage.css-4oy321 {
+    width: 85%;
+  }
+  .stChatMessage.css-janbn0 {
+    max-width: 85%;
+  }
+}
