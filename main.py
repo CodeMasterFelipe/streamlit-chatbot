@@ -68,6 +68,29 @@ class ChatbotApp:
         if "db" not in st.session_state:
             st.session_state["db"] = Database()
 
+    def handle_change_session_name(self, session_id):
+        st.session_state.db.set_session_name(
+            session_id, st.session_state.new_session_name)
+
+    def session_popup(self, session_id, popup_container):
+        with popup_container:
+            st.markdown("<div id='popup-modal'></div>", unsafe_allow_html=True)
+            st.button("")
+            with st.container():
+                st.markdown("<h3 id='session-popup'>Session Popup</h3>",
+                            unsafe_allow_html=True)
+                text_input = st.text_input(
+                    "Session Name:", key="new_session_name")
+
+                if text_input:
+                    print("change session name => ", text_input)
+                    self.handle_change_session_name(session_id)
+
+                with st.container():
+                    st.button("Confirm", on_click=lambda: self.handle_change_session_name(
+                        session_id))
+                    st.button("Cancel")
+
     def create_sidebar(self):
         with st.sidebar:
             self.model_name = st.selectbox(
@@ -76,28 +99,43 @@ class ChatbotApp:
 
             # Display buttons for each session
 
+            popup_container = st.container()
+            # popup_container.write("hello world")
+
             with st.container():
-                st.subheader("Select a Chat Session")
+                st.markdown("<h3 id='session-header'>Select a Chat Session</h3>",
+                            unsafe_allow_html=True)
+                # st.subheader(
+                #     "<span id='chat-session-header'>Select a Chat Session</span>")
                 st.button("\u002B New Chat", use_container_width=True,
                           on_click=handle_new_chat_session, type="secondary")
                 for session in st.session_state.db.get_all_sessions():
-
+                    # print(session)
+                    session_id = session["session_id"]
+                    session_name = session["session_name"]
+                    st.session_state["is_popup_open"] = False
                     with st.container():
-                        selected = st.session_state.current_session == session
+                        selected = st.session_state.current_session == session_id
 
                         if selected:
                             # col1, col2, col3 = st.columns(
                             #     [.8, .1, .1], gap="small")
                             st.button(
-                                session, key=f"button_{session}", use_container_width=True, type="primary")
+                                session_name, key=f"button_{session_id}", use_container_width=True, type="primary")
                             with st.container():
                                 st.button(
-                                    "X", key=f"delete_{session}", on_click=lambda session_id=session: handle_session_deletion(session_id), use_container_width=True)
-                                st.button(
-                                    "✎", key=f"edit_{session}", use_container_width=True)
+                                    "X", key=f"delete_{session_id}", on_click=lambda session_id=session_id: handle_session_deletion(session_id), use_container_width=True)
+                                edit = st.button(
+                                    "✎", key=f"edit_{session_id}", use_container_width=True, on_click=lambda session_id=session_id: self.session_popup(session_id, popup_container))
+                                # if edit:
+                                #     print("hello")
+                                #     with popup_container:
+                                #         st.write("whatup?")
+                                #         s_name = st.text_input("session name")
+                                #         st.button("Confirm")
 
                         else:
-                            st.button(session, key=f"button_{session}", on_click=lambda session_id=session: handle_chat_session_change(
+                            st.button(session_name, key=f"button_{session_id}", on_click=lambda session_id=session_id: handle_chat_session_change(
                                 session_id), use_container_width=True, type="secondary")
             # for session in st.session_state.db.get_all_sessions():
 
@@ -126,8 +164,8 @@ class ChatbotApp:
             st.session_state.current_session = session
 
     def handle_chat(self, prompt):
-        print("Current session =>",
-              st.session_state.current_session)
+        # print("Current session =>",
+        #       st.session_state.current_session)
         self.check_if_new_session()
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.session_state.db.insert_chat(
@@ -168,11 +206,9 @@ class ChatbotApp:
                 key="character",
                 label_visibility="collapsed",
                 format_func=lambda x: f"Chat with {x}",
-                on_change=lambda: print(
-                    f"===> chat with {st.session_state.character}")
             )
         for msg in st.session_state.messages:
-            print(st.session_state.messages)
+            # print(st.session_state.messages)
             st.chat_message(msg["role"], avatar="./db/images/Assistant.png" if msg["role"]
                             == "assistant" else "./static/assets/user-avatar.png").write(msg["content"])
             # message(msg["content"], is_user=msg["role"] ==

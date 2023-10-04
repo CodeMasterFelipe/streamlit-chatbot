@@ -32,7 +32,7 @@ def handle_chat_session_change(session_id):
     # session_id = st.session_state.chat_session_id_selected
     st.session_state.current_session = session_id
     all_chats = st.session_state.db.get_all_chats(session_id)
-    print("Loaded Session Chats =>", all_chats)
+    # print("Loaded Session Chats =>", all_chats)
     st.session_state.messages = all_chats
     _load_memory(all_chats)
 

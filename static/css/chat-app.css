@@ -48,7 +48,7 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
 }
 
 /* Messages Session Buttons */
-.e1f1d6gn0:has(> div.element-container > div.stHeadingContainer) {
+.e1f1d6gn0:has(> div.element-container > div.stMarkdown h3#session-header) {
   /* background-color: yellowgreen !important; */
   [data-testid="stVerticalBlock"] {
     display: flex;
@@ -230,5 +230,94 @@ div.e1f1d6gn0:has(> div.element-container > div.stChatFloatingInputContainer) {
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
+  }
+}
+
+[data-testid="stVerticalBlock"].e1f1d6gn0:has(
+    > div.element-container > div.stMarkdown #popup-modal
+  ) {
+  position: fixed;
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* background-color: transparent; */
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.18);
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.9px);
+  -webkit-backdrop-filter: blur(7.9px);
+  z-index: 1000;
+}
+
+[data-testid="stVerticalBlock"].e1f1d6gn0:has(
+    > div.element-container > div.stMarkdown #popup-modal
+  )
+  > .element-container
+  > .stButton {
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+
+  [data-testid="baseButton-secondary"],
+  [data-testid="baseButton-secondary"]:hover,
+  [data-testid="baseButton-secondary"]:active,
+  [data-testid="baseButton-secondary"]:focus {
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    border: none;
+    content: "";
+  }
+}
+
+div
+  > [data-testid="stVerticalBlock"]:has(
+    > div.element-container > div.stMarkdown h3#session-popup
+  ) {
+  background-color: var(--secondary-background-color);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* margin: auto; */
+  width: 350px;
+  z-index: 1000;
+  padding: 20px;
+  /* border: 1px solid #000; */
+  border: none;
+  border-radius: 1rem;
+
+  [data-testid="stVerticalBlock"] {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  [data-testid="stVerticalBlock"] .element-container {
+    padding-top: 1rem;
+    width: fit-content;
+    margin: 0;
+  }
+  [data-testid="stVerticalBlock"] .stButton {
+    width: fit-content !important;
+  }
+  [data-testid="stVerticalBlock"] p {
+    word-break: none;
+  }
+
+  .stTextInput {
+    width: 310px !important;
+  }
+
+  @media only screen and (max-width: 600px) {
+    transform: translate(-50%, -50%);
   }
 }
