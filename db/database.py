@@ -1,10 +1,21 @@
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
 import uuid
+from datetime import datetime
+
+from pydantic import BaseModel
+
+
+class SessionMetadata(BaseModel):
+    session_id: str
+    session_name: str
+    creation_date: str = str(datetime.now())
+    modified_date: str = str(datetime.now())
 
 
 class Database:
     def __init__(self, db_path='db/db.json', character_path='db/character_db.json'):
         self.db = TinyDB(db_path)
+        self.metadata = self.db.table("metadata")
         self.characters_db = TinyDB(character_path)
 
     # === Chat Sessions Methods ===
@@ -12,8 +23,15 @@ class Database:
         # Create a new table for the session
         session_id = str(uuid.uuid4())
         session = self.db.table(session_id)
+        self.metadata.insert(SessionMetadata(
+            session_id=session_id, session_name=session_id).model_dump())
         # session.insert({'session_name': session_name})
         return session.name
+
+    def set_session_name(self, session_id, session_name):
+        print(">>>> ", session_name)
+        self.db.table("metadata").update({'session_name': session_name},
+                                         where('session_id') == session_id)
 
     def insert_chat(self, session_id, content):
         session = self.db.table(session_id)
@@ -23,13 +41,16 @@ class Database:
         session = self.db.table(session_id)
         return [c["content"] for c in session.all()]
 
+    # def get_all_sessions(self):
+    #     return self.db.tables()
     def get_all_sessions(self):
-        return self.db.tables()
+        return self.db.table("metadata").all()
 
     # def get_all_sessions(self):
     #     return [{'name': table.get().get('session_name'), 'id': table.name} for table in self.db.tables()]
 
     def delete_session(self, session_id):
+        self.metadata.remove(where('session_id') == session_id)
         self.db.drop_table(session_id)
 
     # === Character Methods ===
